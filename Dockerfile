@@ -1,6 +1,5 @@
 FROM alpine:edge AS build_po4a
-
-ADD https://github.com/mquinson/po4a/archive/master.zip /tmp/po4a.zip
+ADD https://github.com/freke/po4a/archive/master.zip /tmp/po4a.zip
 RUN unzip /tmp/po4a.zip
 
 
@@ -17,6 +16,10 @@ COPY --from=build_po4a /po4a-master/extension /po4a/extension
 COPY --from=build_po4a /po4a-master/scripts /po4a/scripts
 COPY --from=build_po4a /po4a-master/share /po4a/share
 COPY --from=build_po4a /po4a-master/po4a* /po4a/
+
+RUN chmod 755 /po4a/po4a*
+
+RUN ls -la po4a
 
 ENV PERLLIB /po4a/lib
 ENV PATH="/po4a:${PATH}"
