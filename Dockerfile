@@ -7,7 +7,7 @@ FROM alpine:edge AS po4a
 
 RUN apk update
 RUN apk upgrade --available
-RUN apk add --no-cache perl gettext perl-unicode-linebreak
+RUN apk add --no-cache perl gettext perl-unicode-linebreak diffutils
 RUN rm -rf /var/cache/apk/*
 
 COPY --from=build_po4a /po4a-master/lib /po4a/lib
